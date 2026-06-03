@@ -1,4 +1,4 @@
-# Real-Time AI Screen Translator
+<h1 align="center">Real-Time AI Screen Translator</h1>
 
 A blazing fast, ultra-lightweight real-time screen translation tool built specifically for gamers. This app allows you to draw a box over any portion of your screen (like game dialog boxes, visual novels, or lyrics) and translates the text instantly, overlaying the translation directly on your screen without disrupting your gameplay.
 
