@@ -9,6 +9,8 @@ A blazing fast, ultra-lightweight real-time screen translation tool built specif
   <img src="assets/3.png" alt="Screenshot 3" width="100%">
 </p>
 
+> **Note**: Currently, this tool only supports translating from **English to Indonesian**. However, you can use it to translate text anywhere on your screen! It was specifically built and optimized for translating in-game subtitles.
+
 ## ✨ Features
 - **Zero-Overhead Capture**: Uses `mss` for lightning-fast, physical-pixel accurate region screen capture.
 - **Built-in Windows OCR**: Utilizes the native Windows 10/11 OCR (`winsdk`), meaning NO heavy AI models (like Tesseract binaries or PyTorch) are running on your PC. It's incredibly fast and uses almost zero CPU/RAM.
