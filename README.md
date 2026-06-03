@@ -19,6 +19,7 @@ A blazing fast, ultra-lightweight real-time screen translation tool built specif
 - **Lightweight Online Translation**: Powered by `deep-translator` routing through free web endpoints, requiring absolutely zero local compute for language processing.
 - **Gamer-Friendly UI**: 
   - Sleek, dark-mode Control Panel.
+  - **Moveable Overlay**: Freely drag and reposition the translation result window anywhere on your screen.
   - Minimizes quietly to the System Tray.
   - Global **`Ctrl+Alt+X`** hotkey to instantly stop translation without ever having to Alt-Tab out of your game. *(Note: For this hotkey to work while playing anti-cheat protected games like Wuthering Waves, you must run the app as Administrator).*
 
