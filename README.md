@@ -2,6 +2,13 @@
 
 A blazing fast, ultra-lightweight real-time screen translation tool built specifically for gamers. This app allows you to draw a box over any portion of your screen (like game dialog boxes, visual novels, or lyrics) and translates the text instantly, overlaying the translation directly on your screen without disrupting your gameplay.
 
+## 📸 Screenshots
+<p align="center">
+  <img src="assets/1.png" alt="Screenshot 1" width="32%">
+  <img src="assets/2.png" alt="Screenshot 2" width="32%">
+  <img src="assets/3.png" alt="Screenshot 3" width="32%">
+</p>
+
 ## ✨ Features
 - **Zero-Overhead Capture**: Uses `mss` for lightning-fast, physical-pixel accurate region screen capture.
 - **Built-in Windows OCR**: Utilizes the native Windows 10/11 OCR (`winsdk`), meaning NO heavy AI models (like Tesseract binaries or PyTorch) are running on your PC. It's incredibly fast and uses almost zero CPU/RAM.
