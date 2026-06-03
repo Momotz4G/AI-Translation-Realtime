@@ -180,9 +180,12 @@ class AppManager:
         self.tray.show()
 
     def start(self):
+        QTimer.singleShot(0, self.show_initial_window)
+        sys.exit(self.app.exec())
+        
+    def show_initial_window(self):
         self.control_panel.showNormal()
         self.control_panel.activateWindow()
-        sys.exit(self.app.exec())
         
     def start_selection(self):
         self.control_panel.hide()
