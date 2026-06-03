@@ -4,9 +4,9 @@ A blazing fast, ultra-lightweight real-time screen translation tool built specif
 
 ## 📸 Screenshots
 <p align="center">
-  <img src="assets/1.png" alt="Screenshot 1" width="32%">
-  <img src="assets/2.png" alt="Screenshot 2" width="32%">
-  <img src="assets/3.png" alt="Screenshot 3" width="32%">
+  <img src="assets/1.png" alt="Screenshot 1" width="100%" style="margin-bottom: 20px;">
+  <img src="assets/2.png" alt="Screenshot 2" width="100%" style="margin-bottom: 20px;">
+  <img src="assets/3.png" alt="Screenshot 3" width="100%">
 </p>
 
 ## ✨ Features
