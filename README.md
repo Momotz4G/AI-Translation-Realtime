@@ -6,7 +6,8 @@ A blazing fast, ultra-lightweight real-time screen translation tool built specif
 <p align="center">
   <img src="assets/1.png" alt="Screenshot 1" width="100%" style="margin-bottom: 20px;">
   <img src="assets/2.png" alt="Screenshot 2" width="100%" style="margin-bottom: 20px;">
-  <img src="assets/3.png" alt="Screenshot 3" width="100%">
+  <img src="assets/3.png" alt="Screenshot 3" width="100%" style="margin-bottom: 20px;">
+  <img src="assets/1.gif" alt="Live Demo" width="100%">
 </p>
 
 > **Note**: Currently, this tool only supports translating from **English to Indonesian**. However, you can use it to translate text anywhere on your screen! It was specifically built and optimized for translating in-game subtitles.
@@ -26,7 +27,6 @@ A blazing fast, ultra-lightweight real-time screen translation tool built specif
 - **No Heavy Background AI**: We do not run any local LLMs that hog your GPU, battery, or memory.
 - **Native OS APIs**: The text recognition relies entirely on the highly optimized OCR engine already built into your Windows operating system.
 - **Open Source**: The code is completely transparent. Feel free to inspect `main.py` and the other scripts to see exactly how your data is handled!
-- **VirusTotal False Positives**: Because the standalone `.exe` is compiled using PyInstaller, a few hyper-aggressive antivirus scanners may flag it as malicious (typically a 2/70 detection rate). This is a [well-known false positive](https://stackoverflow.com/questions/43777106/program-made-with-pyinstaller-now-seen-as-a-trojan-horse-by-antivirus) that happens because malware authors also use PyInstaller. You can completely ignore these warnings, or simply run the app directly from the source code instead!
 
 ## 🚀 Setup & Development (For Forking)
 
