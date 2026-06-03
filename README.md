@@ -19,7 +19,7 @@ A blazing fast, ultra-lightweight real-time screen translation tool built specif
 - **Gamer-Friendly UI**: 
   - Sleek, dark-mode Control Panel.
   - Minimizes quietly to the System Tray.
-  - Global **`Ctrl+Alt+X`** hotkey to instantly stop translation without ever having to Alt-Tab out of your game.
+  - Global **`Ctrl+Alt+X`** hotkey to instantly stop translation without ever having to Alt-Tab out of your game. *(Note: For this hotkey to work while playing anti-cheat protected games like Wuthering Waves, you must run the app as Administrator).*
 
 ## 🛡️ Is this safe?
 **Yes!** 
@@ -66,6 +66,9 @@ If you want to compile your modified code into a single, highly compressed `.exe
 
 3. **Find your App**:
    Once finished, your new standalone app will be located in the `dist/` folder as `RealtimeTranslation_Compact.exe` (roughly ~73MB). You can drag and drop this single file to anyone!
+
+## 🔒 Privacy Policy
+This application operates strictly as a local overlay. **We do not collect, store, or transmit any personal data, screenshots, or keystrokes.** The screen region you select is processed locally by Windows OCR, and only the extracted text string is temporarily sent to Google Translate's free web endpoint for translation. No images or logs are saved to your disk, and absolutely no data is sent to any third-party telemetry servers.
 
 ## 📝 License
 MIT License
