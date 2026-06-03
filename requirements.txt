@@ -1,0 +1,6 @@
+PyQt6==6.7.0
+mss==9.0.1
+winsdk==1.0.0b9
+deep-translator==1.11.4
+Pillow==10.3.0
+keyboard==0.13.5
