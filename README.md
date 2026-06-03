@@ -23,6 +23,9 @@ A blazing fast, ultra-lightweight real-time screen translation tool built specif
   - Minimizes quietly to the System Tray.
   - Global **`Ctrl+Alt+X`** hotkey to instantly stop translation without ever having to Alt-Tab out of your game. *(Note: For this hotkey to work while playing anti-cheat protected games like Wuthering Waves, you must run the app as Administrator).*
 
+## ⚠️ Disclaimer
+Translation and text recognition (OCR) accuracy is not 100% perfect. Performance heavily depends on the complexity of the background and the opacity of the text. For the best results, try to scan text that has high contrast against its background (like subtitles with a dark backing).
+
 ## 🛡️ Is this safe?
 **Yes!** 
 - **No Heavy Background AI**: We do not run any local LLMs that hog your GPU, battery, or memory.
