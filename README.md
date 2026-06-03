@@ -7,7 +7,7 @@ A blazing fast, ultra-lightweight real-time screen translation tool built specif
   <img src="assets/1.png" alt="Screenshot 1" width="100%" style="margin-bottom: 20px;">
   <img src="assets/2.png" alt="Screenshot 2" width="100%" style="margin-bottom: 20px;">
   <img src="assets/3.png" alt="Screenshot 3" width="100%" style="margin-bottom: 20px;">
-  <video src="assets/1.mp4" autoplay loop muted width="100%"></video>
+  <img src="assets/1_small.gif" alt="Live Demo" width="100%">
 </p>
 
 > **Note**: Currently, this tool only supports translating from **English to Indonesian**. However, you can use it to translate text anywhere on your screen! It was specifically built and optimized for translating in-game subtitles.
