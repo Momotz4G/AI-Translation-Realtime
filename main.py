@@ -180,7 +180,8 @@ class AppManager:
         self.tray.show()
 
     def start(self):
-        self.control_panel.show()
+        self.control_panel.showNormal()
+        self.control_panel.activateWindow()
         sys.exit(self.app.exec())
         
     def start_selection(self):
