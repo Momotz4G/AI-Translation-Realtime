@@ -104,7 +104,7 @@ class ResultOverlay(QWidget):
         
         self.toggle_btn = QPushButton("-")
         self.toggle_btn.setCursor(Qt.CursorShape.PointingHandCursor)
-        self.toggle_btn.clicked.connect(self.toggle_collapse)
+        # Note: We handle clicks manually in eventFilter to distinguish from dragging
         self.toggle_btn.installEventFilter(self)
         
         self.container_layout.addWidget(self.label)
@@ -115,6 +115,8 @@ class ResultOverlay(QWidget):
         
         self.is_collapsed = False
         self.drag_pos = None
+        self.drag_start_pos = None
+        self.was_dragged = False
         
         # Put somewhere visible initially
         screen = QApplication.primaryScreen().geometry()
@@ -160,9 +162,23 @@ class ResultOverlay(QWidget):
             self.move(old_right - new_width, old_y)
         
     def eventFilter(self, source, event):
-        if source == self.toggle_btn and event.type() == QEvent.Type.MouseButtonPress:
-            if event.button() == Qt.MouseButton.LeftButton:
+        if source == self.toggle_btn:
+            if event.type() == QEvent.Type.MouseButtonPress and event.button() == Qt.MouseButton.LeftButton:
                 self.drag_pos = event.globalPosition().toPoint() - self.frameGeometry().topLeft()
+                self.drag_start_pos = event.globalPosition().toPoint()
+                self.was_dragged = False
+            elif event.type() == QEvent.Type.MouseMove:
+                if getattr(self, 'drag_start_pos', None) is not None:
+                    diff = event.globalPosition().toPoint() - self.drag_start_pos
+                    if diff.manhattanLength() > 5:
+                        self.was_dragged = True
+                    if getattr(self, 'drag_pos', None) is not None:
+                        self.move(event.globalPosition().toPoint() - self.drag_pos)
+            elif event.type() == QEvent.Type.MouseButtonRelease and event.button() == Qt.MouseButton.LeftButton:
+                if not getattr(self, 'was_dragged', False):
+                    self.toggle_collapse()
+                self.drag_start_pos = None
+                self.was_dragged = False
         return super().eventFilter(source, event)
 
     def mousePressEvent(self, event):
