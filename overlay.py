@@ -149,6 +149,8 @@ class ResultOverlay(QWidget):
             self.adjustSize()
             new_width = self.width()
             self.move(old_right - new_width, old_y)
+            
+        self.raise_()
         
     def update_text(self, text):
         if not text:
@@ -166,6 +168,8 @@ class ResultOverlay(QWidget):
             
             new_width = self.width()
             self.move(old_right - new_width, old_y)
+            
+        self.raise_()
         
     def eventFilter(self, source, event):
         if source == self.toggle_btn:
@@ -180,6 +184,7 @@ class ResultOverlay(QWidget):
                         self.was_dragged = True
                     if getattr(self, 'drag_pos', None) is not None:
                         self.move(event.globalPosition().toPoint() - self.drag_pos)
+                        self.raise_()
             elif event.type() == QEvent.Type.MouseButtonRelease and event.button() == Qt.MouseButton.LeftButton:
                 if not getattr(self, 'was_dragged', False):
                     self.toggle_collapse()
