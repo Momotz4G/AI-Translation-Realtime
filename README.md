@@ -21,7 +21,7 @@ A blazing fast, ultra-lightweight real-time screen and voice translation tool bu
 ## ✨ Features
 - **Zero-Overhead Capture**: Uses `mss` for lightning-fast, physical-pixel accurate region screen capture.
 - **Built-in Windows OCR**: Utilizes the native Windows 10/11 OCR (`winsdk`), meaning NO heavy AI models (like Tesseract binaries or PyTorch) are running on your PC. It's incredibly fast and uses almost zero CPU/RAM.
-- **🎙️ NEW: Real-Time Voice Translation**: Captures internal PC loopback audio and processes it instantly using Groq's lightning-fast Whisper APIs for near zero-latency voice-to-text translation.
+- **🎙️ Real-Time Voice Translation**: Captures internal PC loopback audio and processes it instantly using Groq's lightning-fast Whisper APIs for near zero-latency voice-to-text translation.
 - **🔑 Smart API Key Management**: Safely enter your Groq API keys directly into the UI! Supports entering a comma-separated list of multiple keys for automatic "fallback" rotation when a key runs out of quota.
 - **Smart Diffing Engine**: Only translates when the text actually changes, saving bandwidth and preventing API spam.
 - **Lightweight Online Translation**: Powered by `deep-translator` routing through free web endpoints, requiring absolutely zero local compute for language processing.
