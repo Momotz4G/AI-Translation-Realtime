@@ -4,3 +4,7 @@ winsdk==1.0.0b9
 deep-translator==1.11.4
 Pillow==10.3.0
 keyboard==0.13.5
+soundcard==0.4.3
+soundfile==0.12.1
+groq>=0.9.0
+python-dotenv==1.0.1

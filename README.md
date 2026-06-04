@@ -1,6 +1,12 @@
 <h1 align="center">Real-Time AI Screen Translator</h1>
 
-A blazing fast, ultra-lightweight real-time screen translation tool built specifically for gamers. This app allows you to draw a box over any portion of your screen (like game dialog boxes, visual novels, or lyrics) and translates the text instantly, overlaying the translation directly on your screen without disrupting your gameplay.
+A blazing fast, ultra-lightweight real-time screen and voice translation tool built specifically for gamers. This app allows you to draw a box over any portion of your screen to translate visual text (like dialog boxes or UI), or listen to your live PC game audio and instantly translate spoken dialogue into subtitles directly on your screen without disrupting your gameplay.
+
+<p align="center">
+  <a href="https://github.com/Momotz4G/AI-Translation-Realtime/releases/latest">
+    <img src="https://img.shields.io/github/v/release/Momotz4G/AI-Translation-Realtime?style=for-the-badge&label=Download%20for%20Windows&color=2ea043&logo=windows" alt="Download for Windows" />
+  </a>
+</p>
 
 ## 📸 Screenshots
 <p align="center">
@@ -15,6 +21,8 @@ A blazing fast, ultra-lightweight real-time screen translation tool built specif
 ## ✨ Features
 - **Zero-Overhead Capture**: Uses `mss` for lightning-fast, physical-pixel accurate region screen capture.
 - **Built-in Windows OCR**: Utilizes the native Windows 10/11 OCR (`winsdk`), meaning NO heavy AI models (like Tesseract binaries or PyTorch) are running on your PC. It's incredibly fast and uses almost zero CPU/RAM.
+- **🎙️ NEW: Real-Time Voice Translation**: Captures internal PC loopback audio and processes it instantly using Groq's lightning-fast Whisper APIs for near zero-latency voice-to-text translation.
+- **🔑 Smart API Key Management**: Safely enter your Groq API keys directly into the UI! Supports entering a comma-separated list of multiple keys for automatic "fallback" rotation when a key runs out of quota.
 - **Smart Diffing Engine**: Only translates when the text actually changes, saving bandwidth and preventing API spam.
 - **Lightweight Online Translation**: Powered by `deep-translator` routing through free web endpoints, requiring absolutely zero local compute for language processing.
 - **Gamer-Friendly UI**: 
@@ -23,13 +31,19 @@ A blazing fast, ultra-lightweight real-time screen translation tool built specif
   - Minimizes quietly to the System Tray.
   - Global **`Ctrl+Alt+X`** hotkey to instantly stop translation without ever having to Alt-Tab out of your game. *(Note: For this hotkey to work while playing anti-cheat protected games like Wuthering Waves, you must run the app as Administrator).*
 
+## 📋 Requirements
+- **OS**: Windows 10 or Windows 11 (required for the native `winsdk` OCR engine and internal PC loopback audio capture).
+- **Voice Translation**: A free [Groq API Key](https://console.groq.com/keys) is required to use the Voice Translation feature. (The standard visual OCR feature works completely offline without an API key).
+
 ## ⚠️ Disclaimer
-Translation and text recognition (OCR) accuracy is not 100% perfect. Performance heavily depends on the complexity of the background and the opacity of the text. For the best results, try to scan text that has high contrast against its background (like subtitles with a dark backing).
+1. **OCR**: Translation and text recognition (OCR) accuracy is not 100% perfect. Performance heavily depends on the complexity of the background and the opacity of the text. For the best results, try to scan text that has high contrast against its background (like subtitles with a dark backing).
+2. **Voice Translation**: AI transcription from audio is not 100% perfectly accurate. Because the app captures your live audio into small chunks and sends them to Groq's APIs over the internet for processing, you will naturally experience a small 1-2 second delay before the translation appears.
 
 ## 🛡️ Is this safe?
 **Yes!** 
 - **No Heavy Background AI**: We do not run any local LLMs that hog your GPU, battery, or memory.
 - **Native OS APIs**: The text recognition relies entirely on the highly optimized OCR engine already built into your Windows operating system.
+- **Secure API Key Storage**: Your personal Groq API keys are stored strictly in a local `.env` file on your own computer. They are never transmitted anywhere except directly to Groq's secure official servers.
 - **Open Source**: The code is completely transparent. Feel free to inspect `main.py` and the other scripts to see exactly how your data is handled!
 
 ## 🚀 Setup & Development (For Forking)
@@ -63,17 +77,19 @@ If you want to compile your modified code into a single, highly compressed `.exe
    ```
 
 2. **Run the Optimized Build Command**:
-   By default, the PyQt6 UI framework includes massive web and database libraries that we don't need. Run this exact command to aggressively exclude those bulky unused libraries and compress the app into a single executable file:
+   We've already configured an optimized PyInstaller `.spec` file that aggressively excludes bulky unused libraries (like PyQt6 web modules) to keep the executable lightweight. Simply run:
    
    ```bash
-   pyinstaller --onefile --noconsole --icon=icon.png --add-data "icon.png;." --exclude-module PyQt6.QtNetwork --exclude-module PyQt6.QtSql --exclude-module PyQt6.QtTest --exclude-module PyQt6.QtQml --exclude-module PyQt6.QtQuick --exclude-module PyQt6.QtWebSockets -n "RealtimeTranslation_Compact" main.py
+   pyinstaller --clean RealtimeTranslation_Compact.spec
    ```
 
 3. **Find your App**:
-   Once finished, your new standalone app will be located in the `dist/` folder as `RealtimeTranslation_Compact.exe` (roughly ~73MB). You can drag and drop this single file to anyone!
+   Once finished, your new standalone app will be located in the `dist/` folder as `RealtimeTranslation_Compact.exe`. You can drag and drop this single file to anyone!
 
 ## 🔒 Privacy Policy
-This application operates strictly as a local overlay. **We do not collect, store, or transmit any personal data, screenshots, or keystrokes.** The screen region you select is processed locally by Windows OCR, and only the extracted text string is temporarily sent to Google Translate's free web endpoint for translation. No images or logs are saved to your disk, and absolutely no data is sent to any third-party telemetry servers.
+This application operates strictly as a local overlay. **We do not collect, store, or transmit any personal data, screenshots, or keystrokes.** The screen region you select is processed locally by Windows OCR, and only the extracted text string is temporarily sent to Google Translate's free web endpoint for translation.
+
+For Voice Translation, the audio detector captures your PC loopback audio directly into **RAM**—no audio files are ever saved or written to your hard drive. These small, temporary RAM chunks are sent directly to Groq via their secure API for processing and instantly wiped. Absolutely no telemetry or data is sent to any third-party tracking servers.
 
 ## 📝 License
 MIT License
