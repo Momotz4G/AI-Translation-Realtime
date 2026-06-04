@@ -104,6 +104,7 @@ class ResultOverlay(QWidget):
         
         self.label = QLabel("Waiting for text...")
         self.label.setWordWrap(True)
+        self.label.setMinimumWidth(300)
         font = QFont("Arial", 16, QFont.Weight.Bold)
         self.label.setFont(font)
         
@@ -116,7 +117,6 @@ class ResultOverlay(QWidget):
         self.is_collapsed = False
         self.drag_pos = None
         
-        self.resize(400, 100)
         # Put somewhere visible initially
         screen = QApplication.primaryScreen().geometry()
         self.move(int(screen.width() / 2 - 200), int(screen.height() - 250))
@@ -129,6 +129,7 @@ class ResultOverlay(QWidget):
         else:
             self.label.show()
             self.toggle_btn.setText("-")
+        self.resize(0, 0) # Force window to shrink to minimum size hint
         self.adjustSize()
         
     def update_text(self, text):
