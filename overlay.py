@@ -98,6 +98,7 @@ class ResultOverlay(QWidget):
         self.label = QLabel("Waiting for text...")
         self.label.setWordWrap(True)
         self.label.setMinimumWidth(300)
+        self.label.setMaximumWidth(600)
         font = QFont("Arial", 16, QFont.Weight.Bold)
         self.label.setFont(font)
         
@@ -135,6 +136,7 @@ class ResultOverlay(QWidget):
             self.toggle_btn.setText("-")
             self.setMinimumSize(0, 0)
             self.setMaximumSize(16777215, 16777215)
+            self.label.adjustSize()
             self.adjustSize()
             new_width = self.width()
             self.move(old_right - new_width, old_y)
@@ -144,8 +146,17 @@ class ResultOverlay(QWidget):
             self.label.setText("No text found...")
         else:
             self.label.setText(text)
+            
         if not self.is_collapsed:
+            geom = self.geometry()
+            old_right = geom.x() + geom.width()
+            old_y = geom.y()
+            
+            self.label.adjustSize()
             self.adjustSize()
+            
+            new_width = self.width()
+            self.move(old_right - new_width, old_y)
         
     def mousePressEvent(self, event):
         if event.button() == Qt.MouseButton.LeftButton:
