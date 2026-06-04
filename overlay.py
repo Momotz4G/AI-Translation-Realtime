@@ -91,16 +91,9 @@ class ResultOverlay(QWidget):
             }
         """)
         self.container.setObjectName("container")
-        self.container_layout = QVBoxLayout(self.container)
+        self.container_layout = QHBoxLayout(self.container)
         self.container_layout.setContentsMargins(0, 0, 0, 0)
         self.container_layout.setSpacing(0)
-        
-        self.header_layout = QHBoxLayout()
-        self.header_layout.addStretch()
-        self.toggle_btn = QPushButton("-")
-        self.toggle_btn.setCursor(Qt.CursorShape.PointingHandCursor)
-        self.toggle_btn.clicked.connect(self.toggle_collapse)
-        self.header_layout.addWidget(self.toggle_btn)
         
         self.label = QLabel("Waiting for text...")
         self.label.setWordWrap(True)
@@ -108,8 +101,12 @@ class ResultOverlay(QWidget):
         font = QFont("Arial", 16, QFont.Weight.Bold)
         self.label.setFont(font)
         
-        self.container_layout.addLayout(self.header_layout)
+        self.toggle_btn = QPushButton("-")
+        self.toggle_btn.setCursor(Qt.CursorShape.PointingHandCursor)
+        self.toggle_btn.clicked.connect(self.toggle_collapse)
+        
         self.container_layout.addWidget(self.label)
+        self.container_layout.addWidget(self.toggle_btn, alignment=Qt.AlignmentFlag.AlignTop | Qt.AlignmentFlag.AlignRight)
         
         self.layout.addWidget(self.container)
         self.setLayout(self.layout)
@@ -122,20 +119,25 @@ class ResultOverlay(QWidget):
         self.move(int(screen.width() / 2 - 200), int(screen.height() - 250))
         
     def toggle_collapse(self):
+        geom = self.geometry()
+        old_right = geom.x() + geom.width()
+        old_y = geom.y()
+
         self.is_collapsed = not self.is_collapsed
         if self.is_collapsed:
             self.label.hide()
             self.toggle_btn.setText("+")
-            # Strictly force the window to be exactly the size of the tiny button
             self.setFixedSize(self.toggle_btn.sizeHint())
+            new_width = self.width()
+            self.move(old_right - new_width, old_y)
         else:
             self.label.show()
             self.toggle_btn.setText("-")
-            # Remove the strict size limit so it can auto-expand around the text
             self.setMinimumSize(0, 0)
             self.setMaximumSize(16777215, 16777215)
-            self.resize(0, 0)
             self.adjustSize()
+            new_width = self.width()
+            self.move(old_right - new_width, old_y)
         
     def update_text(self, text):
         if not text:
