@@ -1,5 +1,5 @@
 from PyQt6.QtWidgets import QWidget, QLabel, QVBoxLayout, QHBoxLayout, QPushButton, QApplication
-from PyQt6.QtCore import Qt, pyqtSignal, QRect, QPoint
+from PyQt6.QtCore import Qt, pyqtSignal, QRect, QPoint, QEvent
 from PyQt6.QtGui import QPainter, QColor, QPen, QFont
 
 class SelectionOverlay(QWidget):
@@ -105,6 +105,7 @@ class ResultOverlay(QWidget):
         self.toggle_btn = QPushButton("-")
         self.toggle_btn.setCursor(Qt.CursorShape.PointingHandCursor)
         self.toggle_btn.clicked.connect(self.toggle_collapse)
+        self.toggle_btn.installEventFilter(self)
         
         self.container_layout.addWidget(self.label)
         self.container_layout.addWidget(self.toggle_btn, alignment=Qt.AlignmentFlag.AlignTop | Qt.AlignmentFlag.AlignRight)
@@ -158,6 +159,12 @@ class ResultOverlay(QWidget):
             new_width = self.width()
             self.move(old_right - new_width, old_y)
         
+    def eventFilter(self, source, event):
+        if source == self.toggle_btn and event.type() == QEvent.Type.MouseButtonPress:
+            if event.button() == Qt.MouseButton.LeftButton:
+                self.drag_pos = event.globalPosition().toPoint() - self.frameGeometry().topLeft()
+        return super().eventFilter(source, event)
+
     def mousePressEvent(self, event):
         if event.button() == Qt.MouseButton.LeftButton:
             self.drag_pos = event.globalPosition().toPoint() - self.frameGeometry().topLeft()
