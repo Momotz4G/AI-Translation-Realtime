@@ -126,11 +126,16 @@ class ResultOverlay(QWidget):
         if self.is_collapsed:
             self.label.hide()
             self.toggle_btn.setText("+")
+            # Strictly force the window to be exactly the size of the tiny button
+            self.setFixedSize(self.toggle_btn.sizeHint())
         else:
             self.label.show()
             self.toggle_btn.setText("-")
-        self.resize(0, 0) # Force window to shrink to minimum size hint
-        self.adjustSize()
+            # Remove the strict size limit so it can auto-expand around the text
+            self.setMinimumSize(0, 0)
+            self.setMaximumSize(16777215, 16777215)
+            self.resize(0, 0)
+            self.adjustSize()
         
     def update_text(self, text):
         if not text:
