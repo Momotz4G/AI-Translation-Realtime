@@ -277,6 +277,7 @@ class AppManager:
         self.selection_overlay.show()
         
     def on_selection_made(self, x, y, w, h):
+        self.result_overlay.set_voice_mode(False)
         self.result_overlay.show()
         self.result_overlay.update_text(f"Selected Region: {w}x{h}\\nWaiting for text...")
         
@@ -327,6 +328,7 @@ class AppManager:
         if self.audio_capture is not None:
             self.audio_capture.stop()
             
+        self.result_overlay.set_voice_mode(True)
         self.result_overlay.show()
         self.result_overlay.update_text("Listening for Voice...\\n(Make sure game audio is playing)")
         

@@ -108,10 +108,13 @@ class ResultOverlay(QWidget):
         font = QFont("Arial", 16, QFont.Weight.Bold)
         self.label.setFont(font)
         
+        self.label.setMinimumHeight(0)
+        self.label.setAlignment(Qt.AlignmentFlag.AlignVCenter | Qt.AlignmentFlag.AlignLeft)
+
+        
         self.toggle_btn = QPushButton("-")
         self.toggle_btn.setCursor(Qt.CursorShape.PointingHandCursor)
-        # Note: We handle clicks manually in eventFilter to distinguish from dragging
-        self.toggle_btn.installEventFilter(self)
+        self.toggle_btn.pressed.connect(self.toggle_collapse)
         
         self.container_layout.addWidget(self.label)
         self.container_layout.addWidget(self.toggle_btn, alignment=Qt.AlignmentFlag.AlignTop | Qt.AlignmentFlag.AlignRight)
@@ -127,6 +130,20 @@ class ResultOverlay(QWidget):
         # Put somewhere visible initially
         screen = QApplication.primaryScreen().geometry()
         self.move(int(screen.width() / 2 - 200), int(screen.height() - 250))
+        
+    def set_voice_mode(self, is_voice: bool):
+        if is_voice:
+            from PyQt6.QtGui import QFontMetrics
+            metrics = QFontMetrics(self.label.font())
+            min_height = (metrics.lineSpacing() * 2) + 20
+            self.label.setMinimumHeight(min_height)
+            self.label.setAlignment(Qt.AlignmentFlag.AlignTop | Qt.AlignmentFlag.AlignLeft)
+        else:
+            self.label.setMinimumHeight(0)
+            self.label.setAlignment(Qt.AlignmentFlag.AlignVCenter | Qt.AlignmentFlag.AlignLeft)
+            self.label.adjustSize()
+            self.adjustSize()
+
         
     def toggle_collapse(self):
         geom = self.geometry()
@@ -171,26 +188,6 @@ class ResultOverlay(QWidget):
             
         self.raise_()
         
-    def eventFilter(self, source, event):
-        if source == self.toggle_btn:
-            if event.type() == QEvent.Type.MouseButtonPress and event.button() == Qt.MouseButton.LeftButton:
-                self.drag_pos = event.globalPosition().toPoint() - self.frameGeometry().topLeft()
-                self.drag_start_pos = event.globalPosition().toPoint()
-                self.was_dragged = False
-            elif event.type() == QEvent.Type.MouseMove:
-                if getattr(self, 'drag_start_pos', None) is not None:
-                    diff = event.globalPosition().toPoint() - self.drag_start_pos
-                    if diff.manhattanLength() > 5:
-                        self.was_dragged = True
-                    if getattr(self, 'drag_pos', None) is not None:
-                        self.move(event.globalPosition().toPoint() - self.drag_pos)
-                        self.raise_()
-            elif event.type() == QEvent.Type.MouseButtonRelease and event.button() == Qt.MouseButton.LeftButton:
-                if not getattr(self, 'was_dragged', False):
-                    self.toggle_collapse()
-                self.drag_start_pos = None
-                self.was_dragged = False
-        return super().eventFilter(source, event)
 
     def mousePressEvent(self, event):
         if event.button() == Qt.MouseButton.LeftButton:
