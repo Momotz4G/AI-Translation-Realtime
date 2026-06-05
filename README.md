@@ -35,6 +35,21 @@ A blazing fast, ultra-lightweight real-time screen and voice translation tool bu
 - **OS**: Windows 10 or Windows 11 (required for the native `winsdk` OCR engine and internal PC loopback audio capture).
 - **Voice Translation**: A free [Groq API Key](https://console.groq.com/keys) is required to use the Voice Translation feature. (The standard visual OCR feature works completely offline without an API key).
 
+### ⏱️ How long can I use Voice Translation for free?
+
+With a free Groq API key, your usage is limited by how many times the app sends audio to the server per day. 
+
+Because the app translates your voice in real-time (sending audio every 4 seconds), your free limits look like this:
+
+* **Non-Stop Talking:** You get roughly **2 hours and 15 minutes** of *continuous, non-stop speaking* per day.
+* **Normal Gaming/Conversation:** Because you aren't talking every single second while playing games, this easily stretches to **4 to 6 hours** of normal gameplay per day.
+* **Monthly Total:** You have enough free limit for about **4,000 minutes** of total speech every month!
+
+**What happens if I run out?**
+The voice translation will temporarily stop working. Your limit will automatically reset the next day for free. 
+
+*(If you ever need unlimited 24/7 translation, you can upgrade your Groq API account to a paid tier on their website).*
+
 ## ⚠️ Disclaimer
 1. **OCR**: Translation and text recognition (OCR) accuracy is not 100% perfect. Performance heavily depends on the complexity of the background and the opacity of the text. For the best results, try to scan text that has high contrast against its background (like subtitles with a dark backing).
 2. **Voice Translation**: AI transcription from audio is not 100% perfectly accurate. Because the app captures your live audio into small chunks and sends them to Groq's APIs over the internet for processing, you will naturally experience a small 1-2 second delay before the translation appears.
